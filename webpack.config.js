@@ -6,6 +6,7 @@ const precss = require("precss");
 const postcssImport = require("postcss-import");
 const cssNext = require("postcss-cssnext");
 const cssNested = require("postcss-nested");
+const nodeExternals = require("webpack-node-externals");
 
 const CLIENT_PATH_PREFIX = "client";
 const ENTRY_POINT_APP = "index.js";
@@ -15,6 +16,12 @@ module.exports = {
   entry: {
     app: path.resolve(__dirname, CLIENT_PATH_PREFIX, ENTRY_POINT_APP),
     vendor: ["react", "react-dom", "redux", "react-redux"]
+  },
+  target: 'web',
+  externals: [nodeExternals()],
+  node: {
+    fs: 'empty',
+    net: 'empty',
   },
   output: {
     path: path.resolve(__dirname, CLIENT_PATH_PREFIX, CLIENT_BUILD_PATH),
