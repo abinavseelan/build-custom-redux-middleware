@@ -1,0 +1,22 @@
+{
+  "name": "build-custom-redux-middleware",
+  "version": "1.0.0",
+  "description": "This is a companion repository for the [talk given at ReactJS bangalore](https://www.meetup.com/ReactJS-Bangalore/events/244815606/)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abinavseelan/build-custom-redux-middleware.git"
+  },
+  "author": "Abinav Seelan <abinav.n.seelan@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abinavseelan/build-custom-redux-middleware/issues"
+  },
+  "homepage": "https://github.com/abinavseelan/build-custom-redux-middleware#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
