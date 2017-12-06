@@ -2,31 +2,25 @@ const path = require("path");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const nodeExternals = require("webpack-node-externals");
-
-const CLIENT_PATH_PREFIX = "client";
-const ENTRY_POINT_APP = "index.js";
-const CLIENT_BUILD_PATH = "build";
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, CLIENT_PATH_PREFIX, ENTRY_POINT_APP),
-  },
-  target: 'web',
-  externals: [nodeExternals()],
-  node: {
-    fs: 'empty',
-    net: 'empty',
+    app: "./client/index.js"
   },
   output: {
-    path: path.resolve(__dirname, CLIENT_PATH_PREFIX, CLIENT_BUILD_PATH),
+    path: path.resolve(__dirname, "client", "build"),
     publicPath: "/",
-    filename: "js/[name].[chunkhash:6].bundle.js"
+    filename: "js/[name].bundle.js"
+  },
+  devtool: "inline-source-map",
+  devServer: {
+    contentBase: "./client/build",
+    hot: true
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader",
@@ -38,9 +32,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
+    // new webpack.optimize.UglifyJsPlugin(),
     new HtmlWebpackPlugin({
-      template: "./client/index.html"
-    })
+      template: path.resolve(__dirname, "client", "index.html")
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };

@@ -4,8 +4,7 @@
   "description": "This is a companion repository for the [talk given at ReactJS bangalore](https://www.meetup.com/ReactJS-Bangalore/events/244815606/)",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "webpack --progress ."
+    "start": "webpack-dev-server --hotOnly"
   },
   "repository": {
     "type": "git",
@@ -18,18 +17,15 @@
   },
   "homepage": "https://github.com/abinavseelan/build-custom-redux-middleware#readme",
   "dependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "morgan": "^1.9.0",
     "redux": "^3.7.2"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
+    "webpack-dev-server": "^2.9.5",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",
-    "webpack": "^3.8.1",
-    "webpack-node-externals": "^1.6.0"
+    "webpack": "^3.8.1"
   }
 }
