@@ -2,10 +2,6 @@ const path = require("path");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const precss = require("precss");
-const postcssImport = require("postcss-import");
-const cssNext = require("postcss-cssnext");
-const cssNested = require("postcss-nested");
 const nodeExternals = require("webpack-node-externals");
 
 const CLIENT_PATH_PREFIX = "client";
@@ -15,7 +11,6 @@ const CLIENT_BUILD_PATH = "build";
 module.exports = {
   entry: {
     app: path.resolve(__dirname, CLIENT_PATH_PREFIX, ENTRY_POINT_APP),
-    vendor: ["react", "react-dom", "redux", "react-redux"]
   },
   target: 'web',
   externals: [nodeExternals()],
@@ -36,53 +31,16 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["es2015", "react"]
+            presets: ["es2015"]
           }
         }
-      },
-      {
-        test: /\.s?css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {
-              loader: "css-loader",
-              options: {
-                modules: true,
-                localIdentName: "[hash:base64:5]"
-              }
-            },
-            {
-              loader: "postcss-loader",
-              options: {
-                plugins: () => [
-                  precss,
-                  postcssImport({
-                    addDependencyTo: webpack
-                  }),
-                  cssNext({
-                    browsers: ["Chrome >= 31", "Firefox >= 31", "IE >= 9"],
-                    url: false
-                  }),
-                  cssNested
-                ]
-              }
-            },
-            "sass-loader"
-          ]
-        }),
-        exclude: /node_modules/
-      },
+      }
     ]
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin(),
-    new ExtractTextPlugin("css/app.[chunkhash:6].bundle.css"),
+    new webpack.optimize.UglifyJsPlugin(),
     new HtmlWebpackPlugin({
       template: "./client/index.html"
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ["vendor", "manifest"]
     })
   ]
 };
