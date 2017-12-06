@@ -4,7 +4,7 @@
   "description": "This is a companion repository for the [talk given at ReactJS bangalore](https://www.meetup.com/ReactJS-Bangalore/events/244815606/)",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hotOnly"
+    "start": "webpack-dev-server --hotOnly --host 0.0.0.0 --port 3000"
   },
   "repository": {
     "type": "git",
